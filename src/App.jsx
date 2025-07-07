@@ -59,7 +59,7 @@ function App() {
       {/* Contact Section */}
       <section className="contact-section">
         <h2>Contact</h2>
-        <p>Have questions or feedback? Reach out at <a href="mailto:support@spintyre.app">support@spintyre.app</a>.</p>
+        <p>Have questions or feedback? Reach out at <a href="mailto:spintyre@myyahoo.com">spintyre@myyahoo.com</a>.</p>
       </section>
 
       {/* Footer */}
