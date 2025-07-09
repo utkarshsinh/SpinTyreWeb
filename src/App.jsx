@@ -1,11 +1,13 @@
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import logo from './assets/spintyre-logo.png';
 import screenshot1 from './assets/screenshot1.jpg';
 import screenshot2 from './assets/screenshot2.jpg';
 import screenshot3 from './assets/screenshot3.jpg';
 import screenshot4 from './assets/screenshot4.jpg';
+import PrivacyPolicy from './PrivacyPolicy';
 
-function App() {
+function HomePage() {
   return (
     <div className="app-container">
       {/* Hero Section */}
@@ -65,8 +67,20 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} SpinTyre. All rights reserved.</p>
+        <p><Link to="/privacy-policy" className="footer-link">Privacy Policy</Link></p>
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </Router>
   );
 }
 
