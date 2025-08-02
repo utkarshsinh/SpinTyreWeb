@@ -16,7 +16,7 @@ function HomePage() {
         <h1 className="tagline">SpinTyre</h1>
         <p className="subtitle">A social video platform for car enthusiasts. Share your passion, connect with fellow gearheads, and experience the thrill of automotive culture—all in one app.</p>
         <div className="cta-buttons">
-          <a href="#" className="download-btn">Download on iOS & Android</a>
+          <a href="https://apps.apple.com/us/app/spintyre/id6748114910" className="download-btn">Download on iOS</a>
         </div>
       </header>
 
@@ -54,7 +54,7 @@ function HomePage() {
         <h2>FAQ</h2>
         <ul>
           <li><strong>Is SpinTyre free?</strong> Yes! SpinTyre is free to download and use.</li>
-          <li><strong>Can I use SpinTyre on Android?</strong> Yes! Available on both iOS and Android.</li>
+          <li><strong>Can I use SpinTyre on Android?</strong> SpinTyre is currently available on iOS. Android version will be available soon!</li>
         </ul>
       </section>
 
