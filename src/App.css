@@ -162,7 +162,7 @@ section h2 {
   top: 0.1rem;
 }
 
-.about-section, .faq-section, .contact-section {
+.about-section, .faq-section, .contact-section, .legal-section {
   background: #fff7ed;
 }
 
@@ -177,6 +177,34 @@ section h2 {
 .contact-section a {
   color: #ff9100;
   text-decoration: underline;
+}
+
+.legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.legal-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.2rem;
+  border: 2px solid #ff9100;
+  border-radius: 999px;
+  color: #ff6d00;
+  font-weight: 700;
+  text-decoration: none;
+  background: #fff;
+  transition: all 0.2s;
+}
+
+.legal-link:hover {
+  background: #ff9100;
+  color: #fff;
 }
 
 .footer {
@@ -198,6 +226,11 @@ section h2 {
 .footer-link:hover {
   color: #ff6d00;
   text-decoration: underline;
+}
+
+.footer-separator {
+  color: #ccc;
+  margin: 0 0.65rem;
 }
 
 @media (max-width: 600px) {

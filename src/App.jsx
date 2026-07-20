@@ -6,6 +6,8 @@ import screenshot2 from './assets/screenshot2.jpg';
 import screenshot3 from './assets/screenshot3.jpg';
 import screenshot4 from './assets/screenshot4.jpg';
 import PrivacyPolicy from './PrivacyPolicy';
+import DeleteAccount from './DeleteAccount';
+import DataSafety from './DataSafety';
 
 function HomePage() {
   return (
@@ -54,7 +56,7 @@ function HomePage() {
         <h2>FAQ</h2>
         <ul>
           <li><strong>Is SpinTyre free?</strong> Yes! SpinTyre is free to download and use.</li>
-          <li><strong>Can I use SpinTyre on Android?</strong> SpinTyre is currently available on iOS. Android version will be available soon!</li>
+          <li><strong>Can I use SpinTyre on Android?</strong> SpinTyre is available on iOS, and the Android release is being prepared for Google Play.</li>
         </ul>
       </section>
 
@@ -64,10 +66,26 @@ function HomePage() {
         <p>Have questions or feedback? Reach out at <a href="mailto:spintyre@myyahoo.com">spintyre@myyahoo.com</a>.</p>
       </section>
 
+      <section className="legal-section">
+        <h2>Privacy & Account Controls</h2>
+        <p>Review how SpinTyre handles app data or request account deletion for Play Store and App Store privacy requirements.</p>
+        <div className="legal-links">
+          <Link to="/privacy-policy" className="legal-link">Privacy Policy</Link>
+          <Link to="/delete-account" className="legal-link">Delete Account</Link>
+          <Link to="/data-safety" className="legal-link">Data Safety</Link>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} SpinTyre. All rights reserved.</p>
-        <p><Link to="/privacy-policy" className="footer-link">Privacy Policy</Link></p>
+        <p>
+          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+          <span className="footer-separator">|</span>
+          <Link to="/delete-account" className="footer-link">Delete Account</Link>
+          <span className="footer-separator">|</span>
+          <Link to="/data-safety" className="footer-link">Data Safety</Link>
+        </p>
       </footer>
     </div>
   );
@@ -79,6 +97,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/delete-account" element={<DeleteAccount />} />
+        <Route path="/data-safety" element={<DataSafety />} />
       </Routes>
     </Router>
   );

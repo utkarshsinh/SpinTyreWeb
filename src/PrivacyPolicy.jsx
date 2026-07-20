@@ -9,7 +9,7 @@ function PrivacyPolicy() {
         
         <header className="privacy-header">
           <h1>Privacy Policy</h1>
-          <p className="last-updated">Last updated: {new Date().toLocaleDateString()}</p>
+          <p className="last-updated">Last updated: July 20, 2026</p>
         </header>
 
         <section className="policy-section">
@@ -28,11 +28,11 @@ function PrivacyPolicy() {
           <h3>2.1 Personal Information</h3>
           <p>We may collect personal information that you voluntarily provide to us, including:</p>
           <ul>
-            <li>Account information (username, email address, profile picture)</li>
+            <li>Account information (full name, username, email address, profile picture)</li>
             <li>Authentication data (when you sign in with Google, Apple, or email)</li>
-            <li>Profile information (bio, car details, preferences)</li>
-            <li>User-generated content (videos, comments, likes)</li>
-            <li>Communication preferences</li>
+            <li>Profile information (bio, profile settings, followers, following, saved posts, and block lists)</li>
+            <li>User-generated content (videos, images, captions, comments, replies, reports, likes, and follows)</li>
+            <li>Notification, moderation, and account status records</li>
           </ul>
 
           <h3>2.2 Automatically Collected Information</h3>
@@ -40,10 +40,15 @@ function PrivacyPolicy() {
           <ul>
             <li>Device information (device type, operating system, unique device identifiers)</li>
             <li>Usage data (app features used, time spent, interactions)</li>
-            <li>Log data (IP address, browser type, access times)</li>
-            <li>Location data (if you grant permission)</li>
-            <li>Analytics data (app performance, crash reports)</li>
+            <li>App activity (likes, follows, saved posts, comments, search, and discovery interactions)</li>
+            <li>Log and diagnostics data (IP address, access times, app performance, crash or diagnostic reports where collected)</li>
+            <li>Firebase Analytics and Google service identifiers used for analytics, diagnostics, security, and app functionality</li>
           </ul>
+          <p>
+            SpinTyre does not currently collect precise or approximate location
+            data in the Android app unless the app is later changed to request
+            or collect location.
+          </p>
 
           <h3>2.3 Third-Party Information</h3>
           <p>We may receive information from third-party services when you:</p>
@@ -78,11 +83,12 @@ function PrivacyPolicy() {
           <h3>4.2 Service Providers</h3>
           <p>We may share information with trusted third-party service providers who assist us in:</p>
           <ul>
-            <li>Hosting and maintaining our infrastructure</li>
-            <li>Processing payments</li>
-            <li>Analyzing usage data</li>
+            <li>Providing authentication through Firebase Authentication, Google Sign-In, and Apple Sign-In</li>
+            <li>Hosting user profiles, posts, comments, notifications, and moderation data in Firebase Firestore</li>
+            <li>Storing uploaded images and videos in Firebase Storage</li>
+            <li>Analyzing app usage and diagnostics through Firebase Analytics and Google services</li>
             <li>Providing customer support</li>
-            <li>Delivering notifications</li>
+            <li>Delivering app notifications and safety features</li>
           </ul>
 
           <h3>4.3 Legal Requirements</h3>
@@ -97,7 +103,7 @@ function PrivacyPolicy() {
 
         <section className="policy-section">
           <h2>5. Data Security</h2>
-          <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
+          <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. User data sent between the app and Firebase or Google services is encrypted in transit using HTTPS/TLS. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
         </section>
 
         <section className="policy-section">
@@ -116,7 +122,7 @@ function PrivacyPolicy() {
             <li><strong>Objection:</strong> Object to certain processing of your information</li>
             <li><strong>Withdrawal:</strong> Withdraw consent where processing is based on consent</li>
           </ul>
-          <p>To exercise these rights, please contact us at <a href="mailto:spintyre@myyahoo.com">spintyre@myyahoo.com</a>.</p>
+          <p>To exercise these rights, please contact us at <a href="mailto:spintyre@myyahoo.com">spintyre@myyahoo.com</a>. To request full account deletion, visit the <Link to="/delete-account">SpinTyre account deletion page</Link>.</p>
         </section>
 
         <section className="policy-section">

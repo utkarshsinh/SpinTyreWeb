@@ -104,6 +104,68 @@
   margin: 0.5rem 0;
 }
 
+.request-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff9100 60%, #ff6d00 100%);
+  color: #fff !important;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 2px 12px rgba(255,145,0,0.14);
+}
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.answer-grid > div {
+  background: #fff7ed;
+  border: 1px solid rgba(255,145,0,0.28);
+  border-radius: 0.8rem;
+  padding: 1rem;
+}
+
+.answer-grid p {
+  margin-bottom: 0;
+}
+
+.data-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #ffe0b2;
+  border-radius: 0.8rem;
+}
+
+.data-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.9rem;
+  border-bottom: 1px solid #ffe0b2;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table th {
+  color: #333;
+  background: #fff7ed;
+  font-size: 0.9rem;
+}
+
+.data-table tr:last-child td {
+  border-bottom: 0;
+}
+
 .privacy-footer {
   text-align: center;
   margin-top: 2rem;
@@ -165,6 +227,10 @@
   
   .policy-section h3 {
     font-size: 1rem;
+  }
+
+  .answer-grid {
+    grid-template-columns: 1fr;
   }
 }
 
