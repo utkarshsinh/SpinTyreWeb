@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import logo from './assets/spintyre-logo.png';
+import heroTyre from './assets/hero-tyre.jpg';
 import screenshotFeed from './assets/screenshot3.jpg';
 import screenshotUpload from './assets/screenshot2.jpg';
 import screenshotProfile from './assets/screenshot4.jpg';
@@ -98,7 +99,6 @@ function HomePage() {
 
       <header className="hero" id="top">
         <div className="hero__copy">
-          <img src={logo} alt="SpinTyre" className="hero__logo" />
           <p className="hero__brand">SpinTyre</p>
           <h1 className="hero__headline">Short-form car video for the culture.</h1>
           <p className="hero__support">
@@ -107,13 +107,17 @@ function HomePage() {
           <StoreBadges />
         </div>
 
-        <div className="hero__stage" aria-hidden="true">
-          <div className="phone phone--hero">
+        <div className="hero__stage">
+          <img
+            src={heroTyre}
+            alt="SpinTyre flaming tire mark"
+            className="hero__tyre"
+          />
+          <div className="phone phone--hero" aria-hidden="true">
             <div className="phone__bezel">
               <img src={screenshotFeed} alt="" className="phone__screen" />
             </div>
           </div>
-          <div className="hero__orbit" />
         </div>
       </header>
 
