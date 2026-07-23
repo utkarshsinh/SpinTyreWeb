@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 import logo from './assets/spintyre-logo.png';
-import heroTyre from './assets/hero-tyre.jpg';
+import heroTyre from './assets/hero-tyre.webp';
 import screenshotFeed from './assets/screenshot3.jpg';
 import screenshotUpload from './assets/screenshot2.jpg';
 import screenshotProfile from './assets/screenshot4.jpg';
