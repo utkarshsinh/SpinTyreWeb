@@ -63,7 +63,7 @@ function DataSafety() {
             </div>
             <div>
               <h3>Which account creation methods are supported?</h3>
-              <p>Email/password, Google Sign-In, and Apple Sign-In on supported platforms.</p>
+              <p>Email/password, Google Sign-In, Facebook Login, and Apple Sign-In on supported platforms.</p>
             </div>
             <div>
               <h3>Delete account URL</h3>
