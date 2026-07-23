@@ -29,7 +29,7 @@ function PrivacyPolicy() {
           <p>We may collect personal information that you voluntarily provide to us, including:</p>
           <ul>
             <li>Account information (full name, username, email address, profile picture)</li>
-            <li>Authentication data (when you sign in with Google, Apple, Facebook, or email)</li>
+            <li>Authentication data (when you sign in with Google, Apple, or email)</li>
             <li>Profile information (bio, profile settings, followers, following, saved posts, and block lists)</li>
             <li>User-generated content (videos, images, captions, comments, replies, reports, likes, and follows)</li>
             <li>Notification, moderation, and account status records</li>
@@ -53,7 +53,7 @@ function PrivacyPolicy() {
           <h3>2.3 Third-Party Information</h3>
           <p>We may receive information from third-party services when you:</p>
           <ul>
-            <li>Sign in using Google, Apple, or Facebook authentication</li>
+            <li>Sign in using Google or Apple authentication</li>
             <li>Connect social media accounts</li>
             <li>Use third-party features integrated into our app</li>
           </ul>

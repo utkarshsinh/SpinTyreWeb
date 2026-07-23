@@ -1,77 +1,68 @@
 :root {
-  --ink: #050505;
-  --ink-soft: #0e0e10;
-  --surface: #141416;
-  --text: #f5f5f5;
-  --muted: #a3a3a8;
-  --orange: #ff8c00;
-  --orange-hot: #ff6a00;
-  --flame: #ffcc00;
-  --line: rgba(255, 255, 255, 0.08);
-  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
-  --font-body: "Figtree", "Helvetica Neue", sans-serif;
-  color-scheme: dark;
-}
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: var(--font-body);
-  background: var(--ink);
-  color: var(--text);
+  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
   min-height: 100vh;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-a {
-  color: var(--orange);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--flame);
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
 }
 
 button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
   font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
-::selection {
-  background: rgba(255, 140, 0, 0.35);
-  color: #fff;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
   }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
   }
 }

@@ -17,21 +17,11 @@ function DeleteAccount() {
         </header>
 
         <section className="policy-section">
-          <h2>Delete inside the app</h2>
-          <p>
-            The fastest way to delete your SpinTyre account is in the app:
-            open Profile → Edit Profile → Delete Account. That removes your
-            profile, posts, comments, and related data.
-          </p>
-        </section>
-
-        <section className="policy-section">
           <h2>Account deletion request</h2>
           <p>
             SpinTyre is a car video sharing app operated by the SpinTyre developer,
-            Utkarsh Sinh. Prefer in-app deletion when you can still sign in. Use
-            this page to request permanent deletion by email if you cannot access
-            the app.
+            Utkarsh Sinh. Use this page to request permanent deletion of your
+            SpinTyre account and associated user data.
           </p>
           <p>
             Send your request from the email address connected to your SpinTyre
@@ -43,7 +33,7 @@ function DeleteAccount() {
         </section>
 
         <section className="policy-section">
-          <h2>How to request deletion by email</h2>
+          <h2>How to request deletion</h2>
           <ol>
             <li>Email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</li>
             <li>Use the subject line: SpinTyre Account Deletion Request.</li>
