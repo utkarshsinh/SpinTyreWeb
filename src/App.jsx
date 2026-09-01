@@ -11,6 +11,8 @@ import DeleteAccount from './DeleteAccount';
 import DataSafety from './DataSafety';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/spintyre/id6748114910';
+const PLAY_STORE_URL =
+  'https://play.google.com/store/apps/details?id=com.spintyre.SpinTyre';
 const CONTACT_EMAIL = 'spintyre@myyahoo.com';
 
 const features = [
@@ -48,7 +50,7 @@ const platforms = [
   },
   {
     name: 'Android',
-    status: 'Coming soon',
+    status: 'Available now',
     detail: 'Native Jetpack Compose app sharing the same Firebase community as iOS.',
   },
   {
@@ -65,10 +67,10 @@ function StoreBadges({ className = '' }) {
         <span className="store-btn__eyebrow">Download on the</span>
         <span className="store-btn__label">App Store</span>
       </a>
-      <span className="store-btn store-btn--soon" aria-disabled="true">
-        <span className="store-btn__eyebrow">Coming soon on</span>
+      <a className="store-btn store-btn--google" href={PLAY_STORE_URL} target="_blank" rel="noreferrer">
+        <span className="store-btn__eyebrow">Get it on</span>
         <span className="store-btn__label">Google Play</span>
-      </span>
+      </a>
     </div>
   );
 }
@@ -102,7 +104,8 @@ function HomePage() {
           <p className="hero__brand">SpinTyre</p>
           <h1 className="hero__headline">Short-form car video for the culture.</h1>
           <p className="hero__support">
-            Watch vertical car clips, follow creators, and share what you love — free on iPhone.
+            Watch vertical car clips, follow creators, and share what you love — free on iPhone and
+            Android.
           </p>
           <StoreBadges />
         </div>
@@ -190,7 +193,7 @@ function HomePage() {
       <section className="section" id="platforms">
         <div className="section__intro">
           <p className="eyebrow">Everywhere you drive</p>
-          <h2>iPhone today. Android next. Watch on your wrist.</h2>
+          <h2>iPhone, Android, and Watch on your wrist.</h2>
         </div>
         <div className="platform-list">
           {platforms.map((platform) => (
@@ -232,13 +235,13 @@ function HomePage() {
         <div className="faq">
           <details open>
             <summary>Is SpinTyre free?</summary>
-            <p>Yes. Download and use SpinTyre free on the App Store.</p>
+            <p>Yes. Download and use SpinTyre free on the App Store and Google Play.</p>
           </details>
           <details>
             <summary>Is there an Android app?</summary>
             <p>
-              The Android app is built and sharing the same community backend. Google Play release is
-              next — this site will update when it ships.
+              Yes. SpinTyre is available on Google Play and shares the same community as the iPhone
+              app.
             </p>
           </details>
           <details>

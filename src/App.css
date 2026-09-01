@@ -208,14 +208,8 @@
   background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
 }
 
-.store-btn--soon {
-  opacity: 0.72;
-  cursor: default;
-}
-
-.store-btn--soon:hover {
-  transform: none;
-  border-color: rgba(255, 255, 255, 0.14);
+.store-btn--google {
+  background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
 }
 
 .store-btn__eyebrow {
