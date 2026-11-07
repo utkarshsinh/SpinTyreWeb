@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
 import logo from './assets/spintyre-logo.png';
+import screenshotWelcome from './assets/screenshot1.jpg';
 import screenshotFeed from './assets/screenshot3.jpg';
 import screenshotUpload from './assets/screenshot2.jpg';
 import screenshotProfile from './assets/screenshot4.jpg';
@@ -10,6 +11,7 @@ import DeleteAccount from './DeleteAccount';
 import DataSafety from './DataSafety';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/spintyre/id6748114910';
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.spintyre.SpinTyre';
 const CONTACT_EMAIL = 'spintyre@myyahoo.com';
 
 function Icon({ name, className = '' }) {
@@ -27,11 +29,16 @@ function Icon({ name, className = '' }) {
   return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
 }
 
-function DownloadButton({ secondary = false }) {
+function DownloadButtons({ secondary = false }) {
   return (
-    <a className={`button ${secondary ? 'button--light' : 'button--primary'}`} href={APP_STORE_URL} target="_blank" rel="noreferrer">
-      <span>Get SpinTyre for iPhone</span><Icon name="arrow" />
-    </a>
+    <div className="store-buttons">
+      <a className={`button ${secondary ? 'button--light' : 'button--primary'}`} href={APP_STORE_URL} target="_blank" rel="noreferrer">
+        <span>Get it on the App Store</span><Icon name="arrow" />
+      </a>
+      <a className={`button ${secondary ? 'button--light' : 'button--primary'}`} href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer">
+        <span>Get it on Google Play</span><Icon name="arrow" />
+      </a>
+    </div>
   );
 }
 
@@ -109,7 +116,7 @@ function HomePage() {
             <a href="#experience" onClick={() => setMenuOpen(false)}>Inside the app</a>
             <a href="#platforms" onClick={() => setMenuOpen(false)}>Platforms</a>
             <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
-            <a className="nav__download" href={APP_STORE_URL} target="_blank" rel="noreferrer">Get the app<Icon name="arrow" /></a>
+            <a className="nav__download" href="#platforms" onClick={() => setMenuOpen(false)}>Get the app<Icon name="arrow" /></a>
           </div>
         </nav>
       </header>
@@ -120,15 +127,15 @@ function HomePage() {
             <p className="eyebrow"><span className="status-dot" />For the love of cars</p>
             <h1 id="hero-heading">CAR CULTURE.<br /><span>IN MOTION.</span></h1>
             <p className="hero__description">The build. The details. That sound.<br />A home for your car clips and the people who get them.</p>
-            <div className="hero__actions"><DownloadButton /><a className="text-link" href="#experience">Take a look inside<Icon name="arrow" /></a></div>
-            <p className="hero__availability">Free on iPhone <span aria-hidden="true">/</span> Android release in preparation</p>
+            <div className="hero__actions"><DownloadButtons /><a className="text-link" href="#experience">Take a look inside<Icon name="arrow" /></a></div>
+            <p className="hero__availability">Free on iPhone, iPad, and Android</p>
           </div>
           <div className="hero__visual">
             <span className="hero__backdrop-word" aria-hidden="true">SPIN</span>
             <div className="hero__orbit hero__orbit--one" aria-hidden="true" />
             <div className="hero__orbit hero__orbit--two" aria-hidden="true" />
-            <div className="hero__visual-label"><span className="status-dot" />Made for your kind of scroll</div>
-            <div className="phone phone--hero"><img src={screenshotFeed} width="591" height="1280" alt="An iPhone preview of SpinTyre's full-screen car video feed" fetchPriority="high" /></div>
+            <div className="hero__visual-label"><span className="status-dot" />Your community starts here</div>
+            <div className="phone phone--hero"><img src={screenshotWelcome} width="591" height="1280" alt="SpinTyre iPhone welcome screen with email, Google and Apple sign-in options" fetchPriority="high" /></div>
             <div className="hero__stamp" aria-hidden="true"><Icon name="play" /><span>WATCH.<br />SHARE.<br />REPEAT.</span></div>
             <p className="hero__preview-note">App preview</p>
           </div>
@@ -147,7 +154,7 @@ function HomePage() {
           <div className="section-heading"><p className="eyebrow">Find your way in</p><h2 id="platform-heading">TAKE THE COMMUNITY<br />WITH YOU.</h2></div>
           <div className="platform-grid">
             <article className="platform platform--featured"><Icon name="phone" /><span className="platform__status">Available now</span><h3>iPhone &amp; iPad</h3><p>Your car community, right in your pocket. Watch, post, and stay connected.</p><a href={APP_STORE_URL} target="_blank" rel="noreferrer">View on the App Store<Icon name="arrow" /></a></article>
-            <article className="platform"><Icon name="phone" /><span className="platform__status platform__status--quiet">In preparation</span><h3>Android</h3><p>We&apos;re preparing the Android release for the same SpinTyre community.</p><p className="platform__note">The public download link will appear here when it&apos;s ready.</p></article>
+            <article className="platform"><Icon name="phone" /><span className="platform__status">Available now</span><h3>Android</h3><p>Join the SpinTyre community on Android. Find the app on Google Play.</p><a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer">View on Google Play<Icon name="arrow" /></a></article>
             <article className="platform"><Icon name="watch" /><span className="platform__status platform__status--quiet">iPhone companion</span><h3>Apple Watch</h3><p>A quick look at your profile stats and recent activity, synced from your iPhone.</p><p className="platform__note">Included with the iPhone app. Requires a paired iPhone.</p></article>
           </div>
         </section>
@@ -160,15 +167,15 @@ function HomePage() {
         <section className="section-shell faq-section section-anchor" id="faq" aria-labelledby="faq-heading">
           <div className="section-heading"><p className="eyebrow">A few things to know</p><h2 id="faq-heading">BEFORE YOU<br />JUMP IN.</h2><a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>Talk to us<Icon name="arrow" /></a></div>
           <div className="faq">
-            <details><summary>Is SpinTyre free?<span aria-hidden="true">+</span></summary><p>Yes. SpinTyre is free to download and use on iPhone and iPad.</p></details>
+            <details><summary>Is SpinTyre free?<span aria-hidden="true">+</span></summary><p>Yes. SpinTyre is free to download and use on iPhone, iPad, and Android.</p></details>
             <details><summary>What can I share?<span aria-hidden="true">+</span></summary><p>Share car videos from your library: builds, details, car meets, and your own point of view. Only upload content you have the right to share and follow the community guidelines in the app.</p></details>
-            <details><summary>When can I get it on Android?<span aria-hidden="true">+</span></summary><p>The Android release is in preparation. We&apos;ll add a public download link here when it&apos;s available. It will connect to the same SpinTyre community.</p></details>
+            <details><summary>Is SpinTyre available on Android?<span aria-hidden="true">+</span></summary><p>Yes. Download SpinTyre from <a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer">Google Play</a> to join the same community. Features and appearance can vary by platform and app version.</p></details>
             <details><summary>How does the Watch companion work?<span aria-hidden="true">+</span></summary><p>The Apple Watch companion shows profile stats and recent activity from your paired iPhone. It accompanies the iPhone app; it doesn&apos;t play the video feed.</p></details>
             <details><summary>How do I delete my account?<span aria-hidden="true">+</span></summary><p>In supported app versions, open Profile → Settings → Delete Account. If you can&apos;t sign in or need help, follow the <Link to="/delete-account">account deletion instructions</Link>.</p></details>
           </div>
         </section>
 
-        <section className="join-section" aria-labelledby="join-heading"><div className="section-shell"><p className="eyebrow">Your next scroll starts here</p><h2 id="join-heading">LET&apos;S GET<br /><span>SPINNING.</span></h2><DownloadButton secondary /><p className="join-section__note">Free on the App Store. Android release in preparation.</p></div><span className="join-section__wheel" aria-hidden="true" /></section>
+        <section className="join-section" aria-labelledby="join-heading"><div className="section-shell"><p className="eyebrow">Your next scroll starts here</p><h2 id="join-heading">LET&apos;S GET<br /><span>SPINNING.</span></h2><DownloadButtons secondary /><p className="join-section__note">Free on the App Store and Google Play.</p></div><span className="join-section__wheel" aria-hidden="true" /></section>
       </main>
 
       <footer className="footer section-shell"><div className="footer__top"><Link to="/" className="brand"><img src={logo} width="44" height="44" alt="" /><span>SpinTyre</span></Link><p>For the cars. For the people.</p><a href={`mailto:${CONTACT_EMAIL}`} className="footer__contact"><Icon name="mail" />{CONTACT_EMAIL}</a></div><div className="footer__bottom"><p>© {new Date().getFullYear()} SpinTyre</p><nav aria-label="Legal and support"><Link to="/privacy-policy">Privacy Policy</Link><Link to="/data-safety">Data Safety</Link><Link to="/delete-account">Delete Account</Link></nav><a href="#top">Back to top ↑</a></div></footer>
