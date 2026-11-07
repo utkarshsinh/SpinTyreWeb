@@ -4,7 +4,7 @@ import './PrivacyPolicy.css';
 const contactEmail = 'spintyre@myyahoo.com';
 
 function DeleteAccount() {
-  const mailto = `mailto:${contactEmail}?subject=SpinTyre%20Account%20Deletion%20Request&body=Please%20delete%20my%20SpinTyre%20account%20and%20associated%20data.%0A%0AAccount%20email%3A%20%0AUsername%3A%20%0ASign-in%20method%20(email%2Fpassword%2C%20Google%2C%20or%20Apple)%3A%20%0AAdditional%20details%3A%20`;
+  const mailto = `mailto:${contactEmail}?subject=SpinTyre%20Account%20Deletion%20Request&body=Please%20delete%20my%20SpinTyre%20account%20and%20associated%20data.%0A%0AAccount%20email%3A%20%0AUsername%3A%20%0ASign-in%20method%20(email%2Fpassword%2C%20Google%2C%20Facebook%2C%20or%20Apple)%3A%20%0AAdditional%20details%3A%20`;
 
   return (
     <div className="privacy-policy-container">
@@ -13,15 +13,16 @@ function DeleteAccount() {
 
         <header className="privacy-header">
           <h1>Delete Your SpinTyre Account</h1>
-          <p className="last-updated">Last updated: July 20, 2026</p>
+          <p className="last-updated">Last updated: November 7, 2026</p>
         </header>
 
         <section className="policy-section">
           <h2>Delete inside the app</h2>
           <p>
-            The fastest way to delete your SpinTyre account is in the app:
-            open Profile → Edit Profile → Delete Account. That removes your
-            profile, posts, comments, and related data.
+            In supported app versions, open Profile → Settings → Delete Account and follow
+            the confirmation prompts. You may also find Delete Account under Edit Profile.
+            Wait for the app to confirm completion. If the control is unavailable or deletion
+            does not complete, use the email request below.
           </p>
         </section>
 
@@ -37,6 +38,7 @@ function DeleteAccount() {
             Send your request from the email address connected to your SpinTyre
             account whenever possible.
           </p>
+          <p>Do not include your password, sign-in codes, or private keys in a deletion request.</p>
           <p>
             <a className="request-button" href={mailto}>Email account deletion request</a>
           </p>
@@ -55,11 +57,15 @@ function DeleteAccount() {
 
         <section className="policy-section">
           <h2>Data that will be deleted</h2>
+          <p>
+            A completed deletion removes the active account and its associated app data,
+            subject to the limited retention described below.
+          </p>
           <ul>
             <li>Firebase Authentication account and login identifiers</li>
             <li>Profile information, including name, username, email address, bio, and profile image</li>
             <li>Uploaded videos, images, posts, captions, comments, replies, and saved post records</li>
-            <li>Likes, follows, followers, notification records, and account-specific moderation metadata</li>
+            <li>Likes, follows, followers, notification records, and active-account moderation settings</li>
           </ul>
         </section>
 
@@ -74,9 +80,16 @@ function DeleteAccount() {
           <ul>
             <li>Records required by law or needed to resolve disputes</li>
             <li>Security, abuse-prevention, and moderation records</li>
-            <li>Aggregated or anonymized analytics that no longer identify your account</li>
+            <li>Service-provider security and diagnostic records governed by their retention practices</li>
+            <li>Restricted recovery or audit copies and correspondence needed to handle your request</li>
             <li>Content or records another user independently provided, such as their own reports</li>
           </ul>
+          <p>
+            Deleting your SpinTyre account does not delete your Google, Apple, or Facebook
+            account, or records those services retain under their own privacy policies.
+            See our <Link to="/privacy-policy">Privacy Policy</Link> for provider information
+            and support-contact details.
+          </p>
         </section>
 
         <section className="policy-section">

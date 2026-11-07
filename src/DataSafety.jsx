@@ -3,39 +3,34 @@ import './PrivacyPolicy.css';
 
 const dataRows = [
   {
-    type: 'Personal info',
-    examples: 'Name, username, email address, profile photo, bio',
-    purpose: 'Account management, profile display, authentication, and support',
+    type: 'Account and profile',
+    examples: 'Name, username, email address, account identifier, profile photo, and bio',
+    purpose: 'Signing in, managing your account, displaying your profile, and support',
   },
   {
-    type: 'Photos and videos',
-    examples: 'Profile images, driving videos, and uploaded media',
-    purpose: 'User content upload, storage, playback, and profile display',
+    type: 'Photos, videos, and audio',
+    examples: 'Profile images and uploaded videos, including recorded audio and visible or audible content',
+    purpose: 'Storing and displaying the media you choose to share',
   },
   {
-    type: 'Audio',
-    examples: 'Audio included in uploaded videos',
-    purpose: 'Media upload and playback',
+    type: 'Content and social activity',
+    examples: 'Captions, comments, replies, likes, follows, saved posts, and notifications',
+    purpose: 'Sharing content, connecting with creators, and managing your feed and inbox',
   },
   {
-    type: 'User-generated content',
-    examples: 'Posts, captions, comments, replies, and reports',
-    purpose: 'Social sharing, moderation, safety, and support',
+    type: 'Safety and support',
+    examples: 'Reports, block lists, moderation records, and information you send to support',
+    purpose: 'Responding to requests, enforcing community rules, and protecting accounts',
   },
   {
-    type: 'App activity',
-    examples: 'Likes, follows, saved posts, notifications, search, and interactions',
-    purpose: 'Core app features, personalization, analytics, and safety',
+    type: 'Technical and diagnostic information',
+    examples: 'Device and operating-system details, service identifiers, IP addresses, and SDK diagnostics',
+    purpose: 'Authentication, service operation, reliability, security, and provider service analytics',
   },
   {
-    type: 'Device or other IDs',
-    examples: 'Firebase or Google service identifiers',
-    purpose: 'Authentication, analytics, diagnostics, and security',
-  },
-  {
-    type: 'Diagnostics',
-    examples: 'App performance, crash, and diagnostic data where collected by Google services',
-    purpose: 'Reliability, debugging, and app improvement',
+    type: 'Website requests',
+    examples: 'IP address, browser information, and requested pages or resources',
+    purpose: 'Delivering and protecting this website through Netlify',
   },
 ];
 
@@ -46,53 +41,33 @@ function DataSafety() {
         <Link to="/" className="nav-back">Back to Home</Link>
 
         <header className="privacy-header">
-          <h1>SpinTyre Data Safety Summary</h1>
-          <p className="last-updated">Last updated: July 20, 2026</p>
+          <h1>Your Data in SpinTyre</h1>
+          <p className="last-updated">Last updated: November 7, 2026</p>
         </header>
 
         <section className="policy-section">
-          <h2>Google Play Console answers</h2>
-          <div className="answer-grid">
-            <div>
-              <h3>Does the app collect or share required user data types?</h3>
-              <p>Yes.</p>
-            </div>
-            <div>
-              <h3>Is all user data encrypted in transit?</h3>
-              <p>Yes. Firebase and Google services use HTTPS/TLS.</p>
-            </div>
-            <div>
-              <h3>Which account creation methods are supported?</h3>
-              <p>Email/password, Google Sign-In, Facebook Login, and Apple Sign-In on supported platforms.</p>
-            </div>
-            <div>
-              <h3>Delete account URL</h3>
-              <p>Use <strong>https://spintyre.netlify.app/delete-account</strong>.</p>
-            </div>
-            <div>
-              <h3>Can users request data deletion without deleting account?</h3>
-              <p>No, unless SpinTyre adds a separate public workflow for partial data deletion.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="policy-section">
-          <h2>Data types to disclose</h2>
+          <h2>What we use and why</h2>
+          <p>
+            SpinTyre uses account details, the content you share, and your app activity to
+            provide its social video features. Authentication and cloud providers also
+            process technical information to run, protect, analyze, and improve their services.
+          </p>
           <div className="data-table-wrap">
             <table className="data-table">
+              <caption>Information used by SpinTyre and its service providers</caption>
               <thead>
                 <tr>
-                  <th>Data type</th>
-                  <th>Examples in SpinTyre</th>
-                  <th>Purpose</th>
+                  <th scope="col">Information</th>
+                  <th scope="col">Examples</th>
+                  <th scope="col">Why it is used</th>
                 </tr>
               </thead>
               <tbody>
                 {dataRows.map((row) => (
                   <tr key={row.type}>
-                    <td>{row.type}</td>
-                    <td>{row.examples}</td>
-                    <td>{row.purpose}</td>
+                    <th scope="row">{row.type}</th>
+                    <td data-label="Examples">{row.examples}</td>
+                    <td data-label="Why it is used">{row.purpose}</td>
                   </tr>
                 ))}
               </tbody>
@@ -101,11 +76,48 @@ function DataSafety() {
         </section>
 
         <section className="policy-section">
-          <h2>Location disclosure</h2>
+          <h2>Sharing content and using sign-in providers</h2>
           <p>
-            Do not select location unless SpinTyre is changed to request or
-            collect location data. The Android app's location permissions are
-            not active in the current manifest.
+            Profile details, posts, comments, and social activity that you share can be
+            visible to other people using SpinTyre. Review your videos before uploading:
+            they may include voices, faces, or places in the recording. The version 3.1
+            update removes embedded location metadata before video upload. Availability
+            varies by platform and release stage; older versions may retain it.
+          </p>
+          <p>
+            Firebase provides account, database, and media services. If you choose Google,
+            Apple, or Facebook sign-in, that provider processes information under its own
+            privacy policy, including information for sign-in, security, and its applicable
+            analytics and service-improvement purposes. The{' '}
+            <Link to="/privacy-policy">Privacy Policy</Link> explains these services in more detail.
+          </p>
+        </section>
+
+        <section className="policy-section">
+          <h2>Location and diagnostics</h2>
+          <p>
+            The app does not request device location permissions. Sign-in providers may
+            still estimate general location from an IP address to protect accounts, and
+            videos can contain location information you choose to share.
+          </p>
+          <p>
+            SpinTyre does not use Firebase Analytics to measure app usage. This does not
+            disable operational, diagnostic, or service-analytics information processed
+            by authentication and cloud services.
+          </p>
+        </section>
+
+        <section className="policy-section">
+          <h2>Your choices</h2>
+          <ul>
+            <li>Edit the profile information you share with the community.</li>
+            <li>Use the app&apos;s available controls to remove your posts, comments, or replies.</li>
+            <li>Report content and block accounts when needed.</li>
+            <li>Follow the <Link to="/delete-account">account deletion instructions</Link> to request removal of your account and associated data.</li>
+          </ul>
+          <p>
+            For privacy questions or help with an account request, contact{' '}
+            <a href="mailto:spintyre@myyahoo.com">spintyre@myyahoo.com</a>.
           </p>
         </section>
 

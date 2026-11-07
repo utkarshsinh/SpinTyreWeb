@@ -1,320 +1,199 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import './App.css';
 import logo from './assets/spintyre-logo.png';
-import heroTyre from './assets/hero-tyre.webp';
 import screenshotFeed from './assets/screenshot3.jpg';
 import screenshotUpload from './assets/screenshot2.jpg';
 import screenshotProfile from './assets/screenshot4.jpg';
-import screenshotLogin from './assets/screenshot1.jpg';
 import PrivacyPolicy from './PrivacyPolicy';
 import DeleteAccount from './DeleteAccount';
 import DataSafety from './DataSafety';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/spintyre/id6748114910';
-const PLAY_STORE_URL =
-  'https://play.google.com/store/apps/details?id=com.spintyre.SpinTyre';
 const CONTACT_EMAIL = 'spintyre@myyahoo.com';
 
-const features = [
-  {
-    title: 'Vertical car feed',
-    copy: 'Full-screen clips with like, comment, save, and share — built for car culture, not generic scrolling.',
-  },
-  {
-    title: 'Upload in seconds',
-    copy: 'Pick a video from your library, add a caption, and publish to the community.',
-  },
-  {
-    title: 'Find your crew',
-    copy: 'Search creators, follow profiles, and grow a feed that matches your taste in cars.',
-  },
-  {
-    title: 'Inbox that matters',
-    copy: 'Likes, comments, replies, and new followers land in one place so you never miss the buzz.',
-  },
-  {
-    title: 'Saved for later',
-    copy: 'Bookmark clips from the feed and revisit them anytime under your profile.',
-  },
-  {
-    title: 'Safety built in',
-    copy: 'Report and block tools, content filters, and account deletion when you want a clean exit.',
-  },
-];
+function Icon({ name, className = '' }) {
+  const paths = {
+    arrow: <><path d="M5 12h14M12 5l7 7-7 7" /></>,
+    play: <path d="m9 5 11 7-11 7V5Z" />,
+    plus: <path d="M12 5v14M5 12h14" />,
+    people: <><circle cx="9" cy="8" r="3" /><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 5a3 3 0 0 1 0 6M19 21v-3a6 6 0 0 0-2-4.5" /></>,
+    save: <path d="M6 4h12v17l-6-4-6 4V4Z" />,
+    shield: <><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z" /><path d="m8 12 3 3 5-6" /></>,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
+    phone: <><rect x="6" y="2" width="12" height="20" rx="3" /><path d="M10 18h4" /></>,
+    watch: <><rect x="6" y="7" width="12" height="10" rx="3" /><path d="m8 7 1-5h6l1 5M8 17l1 5h6l1-5M12 10v3h3" /></>,
+  };
+  return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
+}
 
-const platforms = [
-  {
-    name: 'iPhone & iPad',
-    status: 'Available now',
-    detail: 'Native SwiftUI app with Sign in with Apple, Google, Facebook, and email.',
-  },
-  {
-    name: 'Android',
-    status: 'Available now',
-    detail: 'Native Jetpack Compose app sharing the same Firebase community as iOS.',
-  },
-  {
-    name: 'Apple Watch',
-    status: 'Companion',
-    detail: 'Glance at followers, posts, and recent activity without unlocking your phone.',
-  },
-];
-
-function StoreBadges({ className = '' }) {
+function DownloadButton({ secondary = false }) {
   return (
-    <div className={`store-badges ${className}`.trim()}>
-      <a className="store-btn store-btn--apple" href={APP_STORE_URL} target="_blank" rel="noreferrer">
-        <span className="store-btn__eyebrow">Download on the</span>
-        <span className="store-btn__label">App Store</span>
-      </a>
-      <a className="store-btn store-btn--google" href={PLAY_STORE_URL} target="_blank" rel="noreferrer">
-        <span className="store-btn__eyebrow">Get it on</span>
-        <span className="store-btn__label">Google Play</span>
-      </a>
-    </div>
+    <a className={`button ${secondary ? 'button--light' : 'button--primary'}`} href={APP_STORE_URL} target="_blank" rel="noreferrer">
+      <span>Get SpinTyre for iPhone</span><Icon name="arrow" />
+    </a>
+  );
+}
+
+const previews = [
+  { id: 'watch', label: 'Watch', number: '01', title: 'A feed with a shared obsession.', description: 'Car clips, full screen. Watch the details, join the comments, and save the moments you want to come back to.', image: screenshotFeed, alt: 'SpinTyre iPhone feed showing a car video and controls for liking, commenting, saving and sharing', points: ['Vertical video playback', 'Comments and replies', 'Saved clips, always close'] },
+  { id: 'create', label: 'Create', number: '02', title: 'Your car. Your point of view.', description: 'Bring your latest build, a favourite detail, or a moment from a meet. Choose a video from your library, add a caption, and share it.', image: screenshotUpload, alt: 'SpinTyre iPhone upload screen with a video picker, caption field and upload button', points: ['Upload from your library', 'Add your own caption', 'Keep the original sound'] },
+  { id: 'connect', label: 'Connect', number: '03', title: 'Find the people behind the passion.', description: 'Explore creators, follow the accounts you enjoy, and give your own clips a home on your profile.', image: screenshotProfile, alt: 'SpinTyre iPhone creator profile showing a follow button and a grid of car videos', points: ['Search for creators', 'Follow and view profiles', 'Notifications for social activity'] },
+];
+
+const features = [
+  { icon: 'play', title: 'Stay for the clips.', copy: 'A vertical video feed made for cars, builds, details, and everything in between.' },
+  { icon: 'plus', title: 'Share your angle.', copy: 'Post a video and a caption. Let the car, and the sound, do the talking.' },
+  { icon: 'people', title: 'Find your people.', copy: 'Explore profiles, follow creators, and keep the conversation going in comments.' },
+  { icon: 'save', title: 'Keep the inspiration.', copy: 'Save favourite clips so the next idea is easy to find again.' },
+];
+
+function PreviewSection() {
+  const [selected, setSelected] = useState(0);
+  const active = previews[selected];
+
+  function handleTabKey(event, index) {
+    let next;
+    if (event.key === 'ArrowRight') next = (index + 1) % previews.length;
+    if (event.key === 'ArrowLeft') next = (index + previews.length - 1) % previews.length;
+    if (event.key === 'Home') next = 0;
+    if (event.key === 'End') next = previews.length - 1;
+    if (next !== undefined) {
+      event.preventDefault();
+      setSelected(next);
+      document.getElementById(`preview-tab-${previews[next].id}`)?.focus();
+    }
+  }
+
+  return (
+    <section className="experience section-anchor" id="experience" aria-labelledby="experience-heading">
+      <div className="section-shell experience__layout">
+        <div className="experience__copy">
+          <p className="eyebrow eyebrow--orange">Inside SpinTyre</p>
+          <h2 id="experience-heading">ONE PASSION.<br />MORE WAYS IN.</h2>
+          <div className="preview-tabs" role="tablist" aria-label="Explore SpinTyre features">
+            {previews.map((preview, index) => (
+              <button key={preview.id} id={`preview-tab-${preview.id}`} role="tab" aria-selected={selected === index} aria-controls={`preview-panel-${preview.id}`} tabIndex={selected === index ? 0 : -1} onClick={() => setSelected(index)} onKeyDown={(event) => handleTabKey(event, index)}>
+                <span>{preview.number}</span>{preview.label}
+              </button>
+            ))}
+          </div>
+          {previews.map((preview, index) => (
+            <div key={preview.id} id={`preview-panel-${preview.id}`} role="tabpanel" aria-labelledby={`preview-tab-${preview.id}`} hidden={selected !== index} tabIndex={0} className="preview-panel">
+              <h3>{preview.title}</h3>
+              <p>{preview.description}</p>
+              <ul>{preview.points.map((point) => <li key={point}><span aria-hidden="true">↗</span>{point}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+        <figure className="preview-visual">
+          <div className="preview-visual__track" aria-hidden="true" />
+          <div className="phone phone--preview"><img key={active.id} src={active.image} alt={active.alt} width="591" height="1280" loading="lazy" /></div>
+          <figcaption>iPhone app preview <span>Appearance may vary by app version.</span></figcaption>
+        </figure>
+      </div>
+    </section>
   );
 }
 
 function HomePage() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div className="site">
-      <div className="atmosphere" aria-hidden="true">
-        <div className="atmosphere__glow atmosphere__glow--left" />
-        <div className="atmosphere__glow atmosphere__glow--right" />
-        <div className="atmosphere__asphalt" />
-      </div>
-
-      <nav className="nav">
-        <a className="nav__brand" href="#top">
-          <img src={logo} alt="" className="nav__logo" />
-          <span>SpinTyre</span>
-        </a>
-        <div className="nav__links">
-          <a href="#features">Features</a>
-          <a href="#platforms">Platforms</a>
-          <a href="#faq">FAQ</a>
-          <a className="nav__cta" href={APP_STORE_URL} target="_blank" rel="noreferrer">
-            Get the app
-          </a>
-        </div>
-      </nav>
-
-      <header className="hero" id="top">
-        <div className="hero__copy">
-          <p className="hero__brand">SpinTyre</p>
-          <h1 className="hero__headline">Short-form car video for the culture.</h1>
-          <p className="hero__support">
-            Watch vertical car clips, follow creators, and share what you love — free on iPhone and
-            Android.
-          </p>
-          <StoreBadges />
-        </div>
-
-        <div className="hero__stage">
-          <img
-            src={heroTyre}
-            alt="SpinTyre flaming tire mark"
-            className="hero__tyre"
-          />
-          <div className="phone phone--hero" aria-hidden="true">
-            <div className="phone__bezel">
-              <img src={screenshotFeed} alt="" className="phone__screen" />
-            </div>
+    <div className="site" id="top">
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <header className="site-header">
+        <nav className="nav section-shell" aria-label="Main navigation">
+          <a className="brand" href="#top" aria-label="SpinTyre home"><img src={logo} width="44" height="44" alt="" /><span>SpinTyre</span></a>
+          <button className="menu-toggle" aria-expanded={menuOpen} aria-controls="navigation-links" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? 'Close' : 'Menu'}<span aria-hidden="true">{menuOpen ? '−' : '+'}</span></button>
+          <div id="navigation-links" className={`nav__links ${menuOpen ? 'nav__links--open' : ''}`}>
+            <a href="#experience" onClick={() => setMenuOpen(false)}>Inside the app</a>
+            <a href="#platforms" onClick={() => setMenuOpen(false)}>Platforms</a>
+            <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
+            <a className="nav__download" href={APP_STORE_URL} target="_blank" rel="noreferrer">Get the app<Icon name="arrow" /></a>
           </div>
-        </div>
+        </nav>
       </header>
 
-      <section className="section section--proof" aria-label="Product proof">
-        <p className="proof-line">
-          Built for gearheads who live for the feed — not another generic social clone.
-        </p>
-      </section>
-
-      <section className="section" id="features">
-        <div className="section__intro">
-          <p className="eyebrow">What you get</p>
-          <h2>Everything the community needs to spin.</h2>
-        </div>
-        <div className="feature-rail">
-          {features.map((feature) => (
-            <article key={feature.title} className="feature">
-              <h3>{feature.title}</h3>
-              <p>{feature.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section--showcase">
-        <div className="section__intro">
-          <p className="eyebrow">Inside the app</p>
-          <h2>From feed to upload to profile.</h2>
-          <p className="section__lede">
-            Immersive playback, one-tap create, and profiles that show your garage of clips.
-          </p>
-        </div>
-        <div className="showcase">
-          <figure className="showcase__item">
-            <div className="phone">
-              <div className="phone__bezel">
-                <img src={screenshotFeed} alt="SpinTyre vertical video feed" className="phone__screen" />
-              </div>
-            </div>
-            <figcaption>
-              <strong>Home</strong>
-              Full-bleed car videos with side actions for like, comment, save, and share.
-            </figcaption>
-          </figure>
-          <figure className="showcase__item">
-            <div className="phone">
-              <div className="phone__bezel">
-                <img src={screenshotUpload} alt="SpinTyre new post upload screen" className="phone__screen" />
-              </div>
-            </div>
-            <figcaption>
-              <strong>Create</strong>
-              Select a video, caption it up to 500 characters, and hit upload.
-            </figcaption>
-          </figure>
-          <figure className="showcase__item">
-            <div className="phone">
-              <div className="phone__bezel">
-                <img src={screenshotProfile} alt="SpinTyre creator profile" className="phone__screen" />
-              </div>
-            </div>
-            <figcaption>
-              <strong>Profile</strong>
-              Follow creators, browse posts, and keep saved clips in one grid.
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section className="section" id="platforms">
-        <div className="section__intro">
-          <p className="eyebrow">Everywhere you drive</p>
-          <h2>iPhone, Android, and Watch on your wrist.</h2>
-        </div>
-        <div className="platform-list">
-          {platforms.map((platform) => (
-            <article key={platform.name} className="platform">
-              <div className="platform__top">
-                <h3>{platform.name}</h3>
-                <span className="platform__status">{platform.status}</span>
-              </div>
-              <p>{platform.detail}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section section--auth">
-        <div className="auth-split">
-          <div>
-            <p className="eyebrow">Jump in fast</p>
-            <h2>Sign in your way.</h2>
-            <p className="section__lede">
-              Email, Google, Facebook, and Sign in with Apple on iOS — then agree to the community
-              guidelines and start scrolling.
-            </p>
-            <StoreBadges className="store-badges--inline" />
+      <main id="main-content" tabIndex={-1}>
+        <section className="hero section-shell" aria-labelledby="hero-heading">
+          <div className="hero__copy">
+            <p className="eyebrow"><span className="status-dot" />For the love of cars</p>
+            <h1 id="hero-heading">CAR CULTURE.<br /><span>IN MOTION.</span></h1>
+            <p className="hero__description">The build. The details. That sound.<br />A home for your car clips and the people who get them.</p>
+            <div className="hero__actions"><DownloadButton /><a className="text-link" href="#experience">Take a look inside<Icon name="arrow" /></a></div>
+            <p className="hero__availability">Free on iPhone <span aria-hidden="true">/</span> Android release in preparation</p>
           </div>
-          <div className="phone phone--auth">
-            <div className="phone__bezel">
-              <img src={screenshotLogin} alt="SpinTyre sign in screen" className="phone__screen" />
-            </div>
+          <div className="hero__visual">
+            <span className="hero__backdrop-word" aria-hidden="true">SPIN</span>
+            <div className="hero__orbit hero__orbit--one" aria-hidden="true" />
+            <div className="hero__orbit hero__orbit--two" aria-hidden="true" />
+            <div className="hero__visual-label"><span className="status-dot" />Made for your kind of scroll</div>
+            <div className="phone phone--hero"><img src={screenshotFeed} width="591" height="1280" alt="An iPhone preview of SpinTyre's full-screen car video feed" fetchPriority="high" /></div>
+            <div className="hero__stamp" aria-hidden="true"><Icon name="play" /><span>WATCH.<br />SHARE.<br />REPEAT.</span></div>
+            <p className="hero__preview-note">App preview</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section" id="faq">
-        <div className="section__intro">
-          <p className="eyebrow">FAQ</p>
-          <h2>Straight answers.</h2>
-        </div>
-        <div className="faq">
-          <details open>
-            <summary>Is SpinTyre free?</summary>
-            <p>Yes. Download and use SpinTyre free on the App Store and Google Play.</p>
-          </details>
-          <details>
-            <summary>Is there an Android app?</summary>
-            <p>
-              Yes. SpinTyre is available on Google Play and shares the same community as the iPhone
-              app.
-            </p>
-          </details>
-          <details>
-            <summary>Does SpinTyre work on Apple Watch?</summary>
-            <p>
-              Yes. The Watch companion shows your profile stats and recent activity synced from the
-              iPhone app.
-            </p>
-          </details>
-          <details>
-            <summary>How do I delete my account?</summary>
-            <p>
-              Delete from Profile → Edit Profile inside the app, or request deletion on the{' '}
-              <Link to="/delete-account">Delete Account</Link> page.
-            </p>
-          </details>
-          <details>
-            <summary>Who can I contact?</summary>
-            <p>
-              Reach the team at <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
-            </p>
-          </details>
-        </div>
-      </section>
+        <div className="culture-strip" aria-hidden="true"><div className="section-shell"><span>BUILDS</span><i /><span>DETAILS</span><i /><span>CAR MEETS</span><i /><span>YOUR POV</span></div></div>
 
-      <section className="section section--legal">
-        <div className="section__intro">
-          <p className="eyebrow">Trust</p>
-          <h2>Privacy and account controls.</h2>
-          <p className="section__lede">
-            Review how SpinTyre handles data, or request account deletion for App Store and Play Store
-            requirements.
-          </p>
-        </div>
-        <div className="legal-links">
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/delete-account">Delete Account</Link>
-          <Link to="/data-safety">Data Safety</Link>
-        </div>
-      </section>
+        <section className="section-shell features section-anchor" id="features" aria-labelledby="features-heading">
+          <div className="section-heading"><p className="eyebrow">A community in motion</p><h2 id="features-heading">GOOD CARS.<br />GREAT COMPANY.</h2><p>Whether you&apos;re sharing your latest project or just here to watch, there&apos;s a place for your passion.</p></div>
+          <div className="feature-grid">{features.map((feature) => <article className="feature" key={feature.title}><div className="feature__icon"><Icon name={feature.icon} /></div><h3>{feature.title}</h3><p>{feature.copy}</p></article>)}</div>
+        </section>
 
-      <footer className="footer">
-        <div className="footer__brand">
-          <img src={logo} alt="" />
-          <span>SpinTyre</span>
-        </div>
-        <p>Short-form car video for the culture.</p>
-        <p className="footer__meta">
-          <Link to="/privacy-policy">Privacy</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/delete-account">Delete account</Link>
-          <span aria-hidden="true">·</span>
-          <Link to="/data-safety">Data safety</Link>
-          <span aria-hidden="true">·</span>
-          <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
-        </p>
-        <p className="footer__copy">© {new Date().getFullYear()} SpinTyre. All rights reserved.</p>
-      </footer>
+        <PreviewSection />
+
+        <section className="section-shell platforms section-anchor" id="platforms" aria-labelledby="platform-heading">
+          <div className="section-heading"><p className="eyebrow">Find your way in</p><h2 id="platform-heading">TAKE THE COMMUNITY<br />WITH YOU.</h2></div>
+          <div className="platform-grid">
+            <article className="platform platform--featured"><Icon name="phone" /><span className="platform__status">Available now</span><h3>iPhone &amp; iPad</h3><p>Your car community, right in your pocket. Watch, post, and stay connected.</p><a href={APP_STORE_URL} target="_blank" rel="noreferrer">View on the App Store<Icon name="arrow" /></a></article>
+            <article className="platform"><Icon name="phone" /><span className="platform__status platform__status--quiet">In preparation</span><h3>Android</h3><p>We&apos;re preparing the Android release for the same SpinTyre community.</p><p className="platform__note">The public download link will appear here when it&apos;s ready.</p></article>
+            <article className="platform"><Icon name="watch" /><span className="platform__status platform__status--quiet">iPhone companion</span><h3>Apple Watch</h3><p>A quick look at your profile stats and recent activity, synced from your iPhone.</p><p className="platform__note">Included with the iPhone app. Requires a paired iPhone.</p></article>
+          </div>
+        </section>
+
+        <section className="control-section section-shell" aria-labelledby="control-heading">
+          <div className="control-heading"><Icon name="shield" /><div><p className="eyebrow">Your space, your controls</p><h2 id="control-heading">KEEP IT ABOUT THE CARS.</h2></div></div>
+          <div className="control-copy"><p>Report content, block accounts, and manage what you share. Privacy information and account-deletion help are always easy to find.</p><div className="control-links"><Link to="/privacy-policy">Privacy Policy<Icon name="arrow" /></Link><Link to="/delete-account">Account deletion<Icon name="arrow" /></Link></div></div>
+        </section>
+
+        <section className="section-shell faq-section section-anchor" id="faq" aria-labelledby="faq-heading">
+          <div className="section-heading"><p className="eyebrow">A few things to know</p><h2 id="faq-heading">BEFORE YOU<br />JUMP IN.</h2><a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>Talk to us<Icon name="arrow" /></a></div>
+          <div className="faq">
+            <details><summary>Is SpinTyre free?<span aria-hidden="true">+</span></summary><p>Yes. SpinTyre is free to download and use on iPhone and iPad.</p></details>
+            <details><summary>What can I share?<span aria-hidden="true">+</span></summary><p>Share car videos from your library: builds, details, car meets, and your own point of view. Only upload content you have the right to share and follow the community guidelines in the app.</p></details>
+            <details><summary>When can I get it on Android?<span aria-hidden="true">+</span></summary><p>The Android release is in preparation. We&apos;ll add a public download link here when it&apos;s available. It will connect to the same SpinTyre community.</p></details>
+            <details><summary>How does the Watch companion work?<span aria-hidden="true">+</span></summary><p>The Apple Watch companion shows profile stats and recent activity from your paired iPhone. It accompanies the iPhone app; it doesn&apos;t play the video feed.</p></details>
+            <details><summary>How do I delete my account?<span aria-hidden="true">+</span></summary><p>In supported app versions, open Profile → Settings → Delete Account. If you can&apos;t sign in or need help, follow the <Link to="/delete-account">account deletion instructions</Link>.</p></details>
+          </div>
+        </section>
+
+        <section className="join-section" aria-labelledby="join-heading"><div className="section-shell"><p className="eyebrow">Your next scroll starts here</p><h2 id="join-heading">LET&apos;S GET<br /><span>SPINNING.</span></h2><DownloadButton secondary /><p className="join-section__note">Free on the App Store. Android release in preparation.</p></div><span className="join-section__wheel" aria-hidden="true" /></section>
+      </main>
+
+      <footer className="footer section-shell"><div className="footer__top"><Link to="/" className="brand"><img src={logo} width="44" height="44" alt="" /><span>SpinTyre</span></Link><p>For the cars. For the people.</p><a href={`mailto:${CONTACT_EMAIL}`} className="footer__contact"><Icon name="mail" />{CONTACT_EMAIL}</a></div><div className="footer__bottom"><p>© {new Date().getFullYear()} SpinTyre</p><nav aria-label="Legal and support"><Link to="/privacy-policy">Privacy Policy</Link><Link to="/data-safety">Data Safety</Link><Link to="/delete-account">Delete Account</Link></nav><a href="#top">Back to top ↑</a></div></footer>
     </div>
   );
 }
 
+function NotFound() {
+  return <main className="not-found section-shell"><p className="eyebrow">404 / Off track</p><h1>LET&apos;S GET YOU<br />BACK HOME.</h1><p>This page doesn&apos;t exist. Head back to SpinTyre, or contact us if you need help.</p><Link to="/" className="button button--primary">Back to SpinTyre<Icon name="arrow" /></Link><a className="text-link" href={`mailto:${CONTACT_EMAIL}`}>Contact support<Icon name="arrow" /></a></main>;
+}
+
+function RouteExperience() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const titles = { '/': 'SpinTyre — Car culture in motion', '/privacy-policy': 'Privacy Policy — SpinTyre', '/data-safety': 'Your Data — SpinTyre', '/delete-account': 'Delete Your Account — SpinTyre' };
+    document.title = titles[pathname] || 'Page Not Found — SpinTyre';
+    const target = window.location.hash.slice(1);
+    if (target) document.getElementById(target)?.scrollIntoView({ behavior: 'instant' });
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+  return null;
+}
+
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/delete-account" element={<DeleteAccount />} />
-        <Route path="/data-safety" element={<DataSafety />} />
-      </Routes>
-    </Router>
-  );
+  return <Router><RouteExperience /><Routes><Route path="/" element={<HomePage />} /><Route path="/privacy-policy" element={<PrivacyPolicy />} /><Route path="/delete-account" element={<DeleteAccount />} /><Route path="/data-safety" element={<DataSafety />} /><Route path="*" element={<NotFound />} /></Routes></Router>;
 }
 
 export default App;
